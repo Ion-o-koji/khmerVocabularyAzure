@@ -1,7 +1,0 @@
-const express = require('express'); const path = require('path'); const app = express();
-
-// Serve static assets from repository root (index.html, pwa/, etc.) app.use(express.static(path.join(__dirname)));
-
-// SPA fallback app.get('*', (req, res) => { res.sendFile(path.join(__dirname, 'index.html')); });
-
-// PORT is provided by Azure; default to 8080 locally const port = process.env.PORT || 8080; app.listen(port, () => console.log(Listening on ${port}));
