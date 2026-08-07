@@ -46,7 +46,7 @@ phrases.",
 "short_name": "Open",
 "description": "Open Khmer Vocabulary",
 "url": "../index.html",
-"icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+"icons": [{ "src": "appicon-192.png", "sizes": "192x192" }]
 }
 ]
 }
