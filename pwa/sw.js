@@ -3,66 +3,46 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/pwa/manifest.json',
-  '/pwa/sw.js',
   '/pwa/appicon-192.png',
-  '/pwa/appicon-512.png'
+  '/pwa/appicon-512.png',
+  'https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/scripts/khmerVocabularyScript.js',
+  'https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/styles/khmerVocabularyStyles.css'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache).catch(err => {
-          console.warn('Cache addAll error:', err);
-          return Promise.resolve();
-        });
-      })
+      .then(cache => cache.addAll(urlsToCache))
       .then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }).then(() => self.clients.claim())
+    caches.keys().then(keys => Promise.all(
+      keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+    )).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') {
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match('/index.html'))
+    );
     return;
   }
 
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
+    caches.match(event.request).then(cachedResp => {
+      if (cachedResp) return cachedResp;
+      return fetch(event.request).then(networkResp => {
+        if (networkResp && networkResp.status === 200 && networkResp.type !== 'opaque') {
+          const responseClone = networkResp.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseClone));
         }
-        
-        return fetch(event.request).then(response => {
-          if (!response || response.status !== 200 || response.type === 'error') {
-            return response;
-          }
-
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME)
-            .then(cache => {
-              cache.put(event.request, responseToCache);
-            });
-
-          return response;
-        });
-      })
-      .catch(() => {
-        return caches.match('/index.html');
-      })
+        return networkResp;
+      }).catch(() => caches.match('/pwa/appicon-192.png'));
+    })
   );
 });
