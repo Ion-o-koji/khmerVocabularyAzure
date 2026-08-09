@@ -55,19 +55,3 @@
     }
   ]
 }
-{
-"src": "appicon-512.png",
-"sizes": "512x512",
-"type": "image/png",
-"purpose": "maskable"
-}
-],
-"shortcuts": [ {
-"name": "Open App",
-"short_name": "Open",
-"description": "Open Khmer Vocabulary",
-"url": "../index.html",
-"icons": [{ "src": "appicon-192.png", "sizes": "192x192" }]
-}
-]
-}
