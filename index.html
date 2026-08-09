@@ -1,7 +1,28 @@
-<!DOCTYPE html><!-- By Ion-o-koji (Porter Olsen) --><html lang="en"><head><link rel="manifest" href="pwa/manifest.json"><meta name="theme-color" content="#0f0f1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Khmer Vocabulary"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="pwa/appicon-192.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/styles/khmerVocabularyStyles.css"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>Khmer Vocabulary</title><link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/svgs/solid/book.svg"><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script></head><body><div id="root"></div><script src="https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/scripts/khmerVocabularyScript.js"></script><script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/pwa/sw.js')
-    .then(reg => console.log('Service Worker registered successfully:', reg))
-    .catch(err => console.error('Service Worker registration failed:', err));
-}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Khmer Vocabulary</title>
+  <link rel="manifest" href="/pwa/manifest.json" />
+  <meta name="theme-color" content="#0f0f1a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Khmer Vocabulary" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon" href="/pwa/appicon-192.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/styles/khmerVocabularyStyles.css" />
+  <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/svgs/solid/book.svg" />
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/scripts/khmerVocabularyScript.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Service Worker registered successfully:', reg))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    }
+  </script>
+</body>
+</html>
