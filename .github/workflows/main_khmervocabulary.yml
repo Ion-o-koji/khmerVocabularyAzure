@@ -10,15 +10,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Deploy to Azure $web container
         uses: azure/CLI@v2
+        env:
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
         with:
           inlineScript: |
             az storage blob sync \
-              --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" \
+              --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
               --source . \
               --container '$web' \
               --exclude-path '.git*' 'server.js' 'package*.json' 'web.config' 'node_modules*'
