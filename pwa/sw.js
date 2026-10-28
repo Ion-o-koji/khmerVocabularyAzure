@@ -5,7 +5,7 @@ const urlsToCache = [
   '/pwa/manifest.json',
   '/pwa/appicon-192.png',
   '/pwa/appicon-512.png',
-  'https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/scripts/khmerVocabularyScript.js',
+  'https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/scripts/khmerVocabularyScripts.js',
   'https://cdn.jsdelivr.net/gh/Ion-o-koji/khmer-Vocabulary-Assets@main/styles/khmerVocabularyStyles.css'
 ];
 
